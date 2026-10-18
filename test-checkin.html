@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkin Page Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .test { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .success { background: #d4edda; border-color: #c3e6cb; }
+        .error { background: #f8d7da; border-color: #f5c6cb; }
+        .loading { background: #fff3cd; border-color: #ffeaa7; }
+        button { padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 4px; overflow: auto; }
+    </style>
+</head>
+<body>
+    <h1>Checkin Page Debug Tool</h1>
+    
+    <div class="test" id="test1">
+        <h3>1. Test API: /api/events?id=4</h3>
+        <button onclick="testApi1()">Test</button>
+        <div id="result1"></div>
+    </div>
+    
+    <div class="test" id="test2">
+        <h3>2. Test API: /api/events/4/checkins</h3>
+        <button onclick="testApi2()">Test</button>
+        <div id="result2"></div>
+    </div>
+    
+    <div class="test" id="test3">
+        <h3>3. Test API: /api/event-registrations?eventId=4</h3>
+        <button onclick="testApi3()">Test</button>
+        <div id="result3"></div>
+    </div>
+    
+    <div class="test" id="test4">
+        <h3>4. Check Authentication Status</h3>
+        <button onclick="checkAuth()">Check</button>
+        <div id="result4"></div>
+    </div>
+
+    <script>
+        async function testApi1() {
+            const el = document.getElementById('result1');
+            el.innerHTML = '<div class="loading">Testing...</div>';
+            try {
+                const response = await fetch('/api/events?id=4');
+                const data = await response.json();
+                el.innerHTML = `
+                    <div class="success">
+                        <p><strong>Status:</strong> ${response.status}</p>
+                        <p><strong>Response:</strong></p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+            } catch (error) {
+                el.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testApi2() {
+            const el = document.getElementById('result2');
+            el.innerHTML = '<div class="loading">Testing...</div>';
+            try {
+                const response = await fetch('/api/events/4/checkins');
+                const data = await response.json();
+                el.innerHTML = `
+                    <div class="${response.ok ? 'success' : 'error'}">
+                        <p><strong>Status:</strong> ${response.status}</p>
+                        <p><strong>Response:</strong></p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+            } catch (error) {
+                el.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testApi3() {
+            const el = document.getElementById('result3');
+            el.innerHTML = '<div class="loading">Testing...</div>';
+            try {
+                const response = await fetch('/api/event-registrations?eventId=4');
+                const data = await response.json();
+                el.innerHTML = `
+                    <div class="${response.ok ? 'success' : 'error'}">
+                        <p><strong>Status:</strong> ${response.status}</p>
+                        <p><strong>Response:</strong></p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+            } catch (error) {
+                el.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function checkAuth() {
+            const el = document.getElementById('result4');
+            el.innerHTML = '<div class="loading">Checking...</div>';
+            try {
+                // Try to access a protected endpoint
+                const response = await fetch('/api/check-sync');
+                const data = await response.json();
+                el.innerHTML = `
+                    <div class="${response.ok ? 'success' : 'error'}">
+                        <p><strong>Status:</strong> ${response.status}</p>
+                        <p><strong>Response:</strong></p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+            } catch (error) {
+                el.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

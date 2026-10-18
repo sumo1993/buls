@@ -1,0 +1,143 @@
+╔══════════════════════════════════════════════════════════════════╗
+║                                                                  ║
+║                  TICKET FLIP FEATURE - QUICK GUIDE               ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────┐
+│  ✅ WHAT WAS DONE                                                │
+└──────────────────────────────────────────────────────────────────┘
+
+  1. ❌ Removed amber border from ticket card
+     • Clean, borderless design
+     • Professional slate gray gradient
+
+  2. ➕ Added flip animation
+     • Click/tap ticket to flip
+     • Front: Ticket details
+     • Back: Large QR code
+     • Smooth 3D animation
+
+  3. 🎨 Improved layout
+     • QR code now large and scannable
+     • Payment screenshot separate
+     • Better organized
+
+┌──────────────────────────────────────────────────────────────────┐
+│  🎯 HOW TO USE                                                   │
+└──────────────────────────────────────────────────────────────────┘
+
+  STEP 1: Open Ticket View
+    • Go to Treasurer → Tickets
+    • Click "View" button (👁️) on any ticket
+    • Modal opens with ticket details
+
+  STEP 2: View Ticket (Front Side)
+    
+    ┌─────────────────────────────────────┐
+    │ EVENT TICKET              [PAID]    │
+    │ Annual BULS Networking Event        │
+    │ Normal                              │
+    ├─────────────────────────────────────┤
+    │ Attendee          │ Quantity        │
+    │ THEO MEAYEYAN     │ 1 Ticket        │
+    ├─────────────────────────────────────┤
+    │ Total Amount      │ Ticket No.      │
+    │ ¥10.00           │ TKT7054636640   │
+    ├─────────────────────────────────────┤
+    │ Purchased: Oct 6, 2026              │
+    │                    🔄 Tap to flip   │ ← Click here!
+    └─────────────────────────────────────┘
+
+  STEP 3: Flip to QR Code (Back Side)
+    • CLICK anywhere on the ticket card
+    • Watch it flip with 3D animation
+    
+    ┌─────────────────────────────────────┐
+    │                                     │
+    │        Scan QR Code                 │
+    │                                     │
+    │      ┌─────────────┐                │
+    │      │   █████████ │                │
+    │      │   █ QR  █ █ │                │
+    │      │   █████████ │                │
+    │      └─────────────┘                │
+    │                                     │
+    │      TKT7054636640                  │
+    │                 🔄 Tap to flip back │ ← Click to return
+    └─────────────────────────────────────┘
+
+  STEP 4: Flip Back
+    • CLICK again to return to ticket details
+    • Smooth animation back to front
+
+┌──────────────────────────────────────────────────────────────────┐
+│  📱 MOBILE FRIENDLY                                              │
+└──────────────────────────────────────────────────────────────────┘
+
+  ✅ TAP to flip on mobile devices
+  ✅ Smooth 60fps animation
+  ✅ Touch-friendly interface
+  ✅ Works on all screen sizes
+
+┌──────────────────────────────────────────────────────────────────┐
+│  🎨 DESIGN CHANGES                                               │
+└──────────────────────────────────────────────────────────────────┘
+
+  BEFORE:
+    • Ticket had amber/gold left border
+    • QR code small (112px × 112px)
+    • Both ticket and QR visible at once
+
+  AFTER:
+    • Clean design, no borders
+    • QR code large (192px × 192px)
+    • Flip between ticket and QR code
+    • Better organized layout
+
+┌──────────────────────────────────────────────────────────────────┐
+│  ✨ BENEFITS                                                     │
+└──────────────────────────────────────────────────────────────────┘
+
+  ✅ Easier QR code scanning (larger size)
+  ✅ Cleaner ticket design (no border clutter)
+  ✅ Interactive experience (fun flip animation)
+  ✅ Better use of space
+  ✅ Professional appearance
+  ✅ Mobile-friendly
+
+┌──────────────────────────────────────────────────────────────────┐
+│  🔧 TECHNICAL DETAILS                                            │
+└──────────────────────────────────────────────────────────────────┘
+
+  • 3D CSS transform animation
+  • 700ms smooth transition
+  • Backface visibility hidden
+  • Perspective: 1000px
+  • Auto-resets when modal opens
+
+┌──────────────────────────────────────────────────────────────────┐
+│  🧪 TEST IT NOW                                                  │
+└──────────────────────────────────────────────────────────────────┘
+
+  1. Go to: http://localhost:3000/treasurer/tickets
+  
+  2. Click "View" (👁️) on any ticket
+  
+  3. Click the ticket card to flip
+  
+  4. See QR code on back
+  
+  5. Click again to flip back
+
+╔══════════════════════════════════════════════════════════════════╗
+║                  ✨ FEATURE IS LIVE! ✨                          ║
+║                                                                  ║
+║  The ticket flip animation is now working on:                    ║
+║    • Treasurer Tickets page                                      ║
+║    • View Details modal                                          ║
+║    • Desktop and mobile                                          ║
+║                                                                  ║
+║  Try it out now!                                                 ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝

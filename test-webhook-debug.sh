@@ -1,0 +1,46 @@
+#!/bin/bash
+
+echo "================================================"
+echo "🔍 WEBHOOK DEBUGGING HELPER"
+echo "================================================"
+echo ""
+echo "Step 1: Check webhook endpoint is accessible"
+echo "================================================"
+curl -s -I https://chewy-smokeless-scratch.ngrok-free.dev/api/webhooks/clerk | head -5
+echo ""
+echo "================================================"
+echo "Step 2: Check webhook secret in .env.local"
+echo "================================================"
+echo "Webhook secret preview:"
+grep CLERK_WEBHOOK_SECRET /Users/apple/Documents/BULS/lsub-management/.env.local | sed 's/=.*/=***/'
+echo ""
+echo "================================================"
+echo "Step 3: Test webhook with sample payload"
+echo "================================================"
+echo "This will fail (expected) but shows the endpoint works"
+curl -s -X POST https://chewy-smokeless-scratch.ngrok-free.dev/api/webhooks/clerk \
+  -H "Content-Type: application/json" \
+  -d '{"test":"data"}' | head -10
+echo ""
+echo "================================================"
+echo "Step 4: Check ngrok tunnel status"
+echo "================================================"
+curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url'
+echo ""
+echo "================================================"
+echo "IMPORTANT: Check Clerk Dashboard for webhook logs"
+echo "================================================"
+echo "1. Go to https://dashboard.clerk.com"
+echo "2. Navigate to Webhooks"
+echo "3. Click on your webhook"
+echo "4. Check 'Recent attempts' for errors"
+echo "5. Look for the exact webhook secret there"
+echo ""
+echo "================================================"
+echo "NEXT STEPS:"
+echo "================================================"
+echo "1. Compare webhook secret in Clerk vs .env.local"
+echo "2. Make sure they match EXACTLY (no extra spaces)"
+echo "3. Check Clerk webhook logs for specific errors"
+echo "4. Look at server logs for detailed webhook debugging"
+echo ""

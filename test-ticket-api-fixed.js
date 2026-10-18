@@ -1,0 +1,32 @@
+// Test the ticket API directly
+const http = require('http')
+
+async function testTicketAPI() {
+  const ticketId = '3c6574d9-63f1-473f-b32f-e2b2bbc46c97'
+  const url = `http://localhost:3000/api/tickets/${ticketId}/guests`
+  
+  console.log(`🌐 Testing API: ${url}`)
+  
+  return new Promise((resolve, reject) => {
+    const req = http.get(url, (res) => {
+      let data = ''
+      
+      res.on('data', (chunk) => {
+        data += chunk
+      })
+      
+      res.on('end', () => {
+        console.log(`📊 Status: ${res.statusCode} ${res.statusMessage}`)
+        console.log(`📦 Response: ${data}`)
+        resolve({ status: res.statusCode, data })
+      })
+    })
+    
+    req.on('error', (error) => {
+      console.error('❌ Request error:', error.message)
+      reject(error)
+    })
+  })
+}
+
+testTicketAPI().catch(console.error)

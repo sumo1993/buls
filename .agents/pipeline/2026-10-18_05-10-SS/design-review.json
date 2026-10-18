@@ -1,0 +1,29 @@
+{
+  "verdict": "CHANGES_REQUESTED",
+  "findings": [
+    {
+      "severity": "HIGH",
+      "location": "Design Section 'Step 1' (lines ~465-485)",
+      "issue": "Missing amount_paid field validation - the filtering logic does not safely handle null/string values for amount_paid, which may cause parsing errors.",
+      "fix": "Add safe parsing: `const amount = parseFloat(String(reg.amount_paid || 0)); const paid = amount > 0;`"
+    },
+    {
+      "severity": "HIGH",
+      "location": "app/api/event-registrations/route.ts, lines 242-243",
+      "issue": "Incorrect payment_status mapping for non-members - the API maps status directly to payment_status (e.g., 'approved'), but the filter logic expects payment_status === 'paid' for non-members.",
+      "fix": "Either update API to derive payment_status from amount/status: `payment_status: reg.status === 'refunded' ? 'refunded' : (reg.amount_paid > 0 ? 'paid' : 'pending')`, or update filter logic to check status === 'approved' instead of payment_status === 'paid'"
+    },
+    {
+      "severity": "MEDIUM",
+      "location": "app/secretary/events/[id]/checkin/page.tsx, line 182",
+      "issue": "setEventRequiresPayment error acknowledged but not verified - the current passesVerifiedFilter function does not use this state variable, suggesting the error may be from stale code.",
+      "fix": "Verify the error exists in current code or remove 'unresolved' note from design"
+    },
+    {
+      "severity": "NIT",
+      "location": "Design Section 'Step 1', line ~467",
+      "issue": "Assumes all ticket-only events have non-member registrations; Event 4 has special behavior excluding free registrations at API level.",
+      "fix": "Clarify whether ticket-only events include non-member registrations and whether free registrations should ever appear."
+    }
+  ]
+}

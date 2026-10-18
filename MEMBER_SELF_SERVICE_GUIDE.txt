@@ -1,0 +1,116 @@
+╔══════════════════════════════════════════════════════════════════╗
+║                                                                  ║
+║     HOW TO FIX YOUR NAME FROM "COMMITTEE" TO YOUR REAL NAME     ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────┐
+│  STEP 1: LOGIN                                                   │
+└──────────────────────────────────────────────────────────────────┘
+
+    1. Open browser
+    2. Go to: http://localhost:3000
+    3. Click "Sign In"
+    4. Enter your email and password
+    5. Click "Sign In"
+
+┌──────────────────────────────────────────────────────────────────┐
+│  STEP 2: GO TO SETTINGS                                          │
+└──────────────────────────────────────────────────────────────────┘
+
+    Option A: Click "Settings" in the navigation menu
+
+    Option B: Type in browser: http://localhost:3000/settings
+
+┌──────────────────────────────────────────────────────────────────┐
+│  STEP 3: UPDATE YOUR NAME                                        │
+└──────────────────────────────────────────────────────────────────┘
+
+    1. Look for section: "Personal Information"
+    
+    2. Find field: "Full Name *"
+    
+    3. You will see: [Committee          ]
+    
+    4. Clear it and type your real name:
+       Example: [John Doe            ]
+    
+    5. Must include FIRST and LAST name!
+    
+       ✅ Valid:   "John Doe"
+       ✅ Valid:   "Mary Jane Smith"
+       ❌ Invalid: "John" (only one word)
+       ❌ Invalid: "Committee" (placeholder)
+
+┌──────────────────────────────────────────────────────────────────┐
+│  STEP 4: WAIT FOR AUTO-SAVE                                      │
+└──────────────────────────────────────────────────────────────────┘
+
+    • Stop typing for 3 seconds
+    
+    • Look in top-right corner:
+    
+      💾 Saving...           ← Wait for this
+      
+      ✅ Saved 2 seconds ago ← Success!
+
+┌──────────────────────────────────────────────────────────────────┐
+│  STEP 5: VERIFY YOUR NAME                                        │
+└──────────────────────────────────────────────────────────────────┘
+
+    1. Go to "My Tickets" in the menu
+    
+    2. If you have tickets, click "View" on any ticket
+    
+    3. Your REAL NAME should now appear instead of "Committee"!
+
+╔══════════════════════════════════════════════════════════════════╗
+║                      IMPORTANT NOTES                             ║
+╚══════════════════════════════════════════════════════════════════╝
+
+  ⚠️  Your name MUST include both first AND last name
+  
+  ⚠️  Do NOT use: "Committee", "Admin", "Test", "User", "Member"
+  
+  ⚠️  Wait for "Saved ✓" before closing the page
+  
+  ⚠️  If you see an error, read it carefully and fix the issue
+
+╔══════════════════════════════════════════════════════════════════╗
+║                     COMMON ERRORS                                ║
+╚══════════════════════════════════════════════════════════════════╝
+
+  ❌ "Please enter your real full name, not a placeholder"
+     → You typed "Committee" or another blocked word
+     → Fix: Use your actual name
+  
+  ❌ "Please enter your full name (first and last name)"
+     → You only entered one word
+     → Fix: Add your last name too
+  
+  ❌ "Failed to save changes"
+     → Internet connection issue
+     → Fix: Check WiFi and try again
+
+╔══════════════════════════════════════════════════════════════════╗
+║                    NEED HELP?                                    ║
+╚══════════════════════════════════════════════════════════════════╝
+
+  1. Read this guide again carefully
+  
+  2. Contact BULS Secretary via WeChat
+  
+  3. Email BULS Admin
+  
+  4. Secretary can also update your name from their panel
+
+╔══════════════════════════════════════════════════════════════════╗
+║                  ✨ THAT'S IT! ✨                                ║
+║                                                                  ║
+║  Your name will now appear correctly on:                         ║
+║    • All your tickets                                            ║
+║    • Event registrations                                         ║
+║    • Payment receipts                                            ║
+║    • Profile displays                                            ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝

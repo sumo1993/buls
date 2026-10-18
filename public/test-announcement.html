@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcement API Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #D62828;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #003366;
+        }
+        
+        .section h2 {
+            color: #003366;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        button {
+            background: #D62828;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #b71f1f;
+        }
+        
+        button.secondary {
+            background: #003366;
+        }
+        
+        button.secondary:hover {
+            background: #002244;
+        }
+        
+        .output {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+        
+        .success {
+            color: #4CAF50;
+        }
+        
+        .error {
+            color: #f44336;
+        }
+        
+        .info {
+            color: #2196F3;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .status.loading {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .status.success {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .status.error {
+            background: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Announcement API Test Tool</h1>
+        <p class="subtitle">Debug and test the announcement creation system</p>
+        
+        <div class="warning">
+            <strong>⚠️ Important:</strong> You must be logged in and have admin or secretary role to create announcements.
+            <br>If tests fail, check the output below for specific error messages.
+        </div>
+        
+        <div class="section">
+            <h2>Step 1: Check Your Status</h2>
+            <p>First, verify you're authenticated and have the correct permissions.</p>
+            <button onclick="checkStatus()">Check My Status</button>
+            <div id="status-output" class="output" style="display: none;"></div>
+        </div>
+        
+        <div class="section">
+            <h2>Step 2: Create Test Announcement</h2>
+            <p>Create a test announcement using the debug endpoint.</p>
+            <button onclick="createTestAnnouncement()">Create Test Announcement</button>
+            <div id="create-output" class="output" style="display: none;"></div>
+        </div>
+        
+        <div class="section">
+            <h2>Step 3: View All Announcements</h2>
+            <p>Fetch and display all active announcements.</p>
+            <button onclick="viewAnnouncements()">View Announcements</button>
+            <div id="view-output" class="output" style="display: none;"></div>
+        </div>
+        
+        <div class="section">
+            <h2>Quick Actions</h2>
+            <button class="secondary" onclick="window.location.href='/admin/announcements'">Go to Admin Page</button>
+            <button class="secondary" onclick="window.location.href='/announcements'">View Public Announcements</button>
+            <button class="secondary" onclick="window.location.href='/admin/sync-clerk'">Sync Clerk Users</button>
+        </div>
+    </div>
+
+    <script>
+        function displayOutput(elementId, data, isError = false) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            
+            if (isError) {
+                element.innerHTML = `<span class="error">❌ Error:</span>\n${JSON.stringify(data, null, 2)}`;
+            } else {
+                element.innerHTML = `<span class="success">✅ Success:</span>\n${JSON.stringify(data, null, 2)}`;
+            }
+        }
+        
+        function displayLoading(elementId) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            element.innerHTML = '<span class="info">⏳ Loading...</span>';
+        }
+        
+        async function checkStatus() {
+            const outputId = 'status-output';
+            displayLoading(outputId);
+            
+            try {
+                const response = await fetch('/api/test-announcement', {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayOutput(outputId, {
+                        message: 'Status check successful',
+                        authenticated: true,
+                        user: data.user,
+                        permissions: {
+                            canCreateAnnouncements: data.canCreateAnnouncements,
+                            currentRole: data.user.role,
+                            requiredRoles: ['admin', 'secretary']
+                        },
+                        existingAnnouncements: data.announcements,
+                        nextSteps: data.nextSteps
+                    });
+                } else {
+                    displayOutput(outputId, data, true);
+                }
+            } catch (error) {
+                displayOutput(outputId, {
+                    error: 'Network error',
+                    message: error.message,
+                    suggestion: 'Make sure the development server is running'
+                }, true);
+            }
+        }
+        
+        async function createTestAnnouncement() {
+            const outputId = 'create-output';
+            displayLoading(outputId);
+            
+            try {
+                const response = await fetch('/api/test-announcement', {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayOutput(outputId, {
+                        message: 'Test announcement created successfully!',
+                        announcement: data.announcement
+                    });
+                } else {
+                    displayOutput(outputId, data, true);
+                }
+            } catch (error) {
+                displayOutput(outputId, {
+                    error: 'Network error',
+                    message: error.message
+                }, true);
+            }
+        }
+        
+        async function viewAnnouncements() {
+            const outputId = 'view-output';
+            displayLoading(outputId);
+            
+            try {
+                const response = await fetch('/api/announcements', {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayOutput(outputId, {
+                        total: data.announcements.length,
+                        announcements: data.announcements
+                    });
+                } else {
+                    displayOutput(outputId, data, true);
+                }
+            } catch (error) {
+                displayOutput(outputId, {
+                    error: 'Network error',
+                    message: error.message
+                }, true);
+            }
+        }
+        
+        // Auto-check status on page load
+        window.addEventListener('load', () => {
+            console.log('🔧 Announcement API Test Tool loaded');
+            console.log('📝 Click "Check My Status" to get started');
+        });
+    </script>
+</body>
+</html>
